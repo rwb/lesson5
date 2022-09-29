@@ -1,6 +1,6 @@
 ### Lesson 5 - Thursday 9/29/22
 
-### Lesson 4 - Thursday 9/23/21
+# We begin by reading in our Minneapolis dataset from last week.
 
 * We begin by re-entering the Minneapolis dataset:
 
