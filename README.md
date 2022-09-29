@@ -48,6 +48,9 @@ df$x <- rep(NA,313)
 df$x[df$ta==1] <- 1
 df$x[df$ta==2 | df$ta==3] <- 0
 table(df$x,df$ta,exclude=NULL)
+
+x <- df$ta
+y <- df$y
 ```
 
 which yields the following output:
