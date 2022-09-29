@@ -76,7 +76,7 @@ which yields the following output:
 ```r
 # estimate logistic regression model
 
-lr <- glm(y~1+x,family="binomial"(link="logit"))
+lr <- glm(y~1+x,data=df,family="binomial"(link="logit"))
 summary(lr)
 logLik(lr)
 ```
