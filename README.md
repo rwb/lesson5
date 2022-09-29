@@ -1,39 +1,77 @@
 ### Lesson 5 - Thursday 9/29/22
 
-# We begin by reading in our Minneapolis dataset from last week.
-
-* We begin by re-entering the Minneapolis dataset:
+* We begin by reading in our Minneapolis dataset from last week.
 
 ```r
-# enter dataset
-
-y0 <- c(rep(1,47),rep(0,221-47))
-y1 <- c(rep(1,10),rep(0,92-10))
-y <- c(y0,y1)
-x <- c(rep(0,221),rep(1,92))
-
-table(y,x)
+df <- read.csv(file="minn.txt",sep=",",header=T)
+head(df,n=10)
+tail(df,n=10)
 ```
 
 * Here is our output:
 
 ```rout
-> # enter dataset
-> 
-> y0 <- c(rep(1,47),rep(0,221-47))
-> y1 <- c(rep(1,10),rep(0,92-10))
-> y <- c(y0,y1)
-> x <- c(rep(0,221),rep(1,92))
-> 
-> table(y,x)
-   x
-y     0   1
-  0 174  82
-  1  47  10
+> df <- read.csv(file="minn.txt",sep=",",header=T)
+> head(df,n=10)
+   id ta td aggcirc y
+1   1  1  1       1 1
+2   2  1  1       1 1
+3   3  1  1       1 1
+4   4  1  1       1 1
+5   5  1  1       1 1
+6   6  1  1       1 1
+7   7  1  1       1 1
+8   8  1  1       1 0
+9   9  1  1       1 0
+10 10  1  1       1 0
+> tail(df,n=10)
+     id ta td aggcirc y
+304 304  3  3       0 0
+305 305  3  3       0 0
+306 306  3  3       0 0
+307 307  3  3       0 0
+308 308  3  3       0 0
+309 309  3  3       0 0
+310 310  3  3       0 0
+311 311  3  3       0 0
+312 312  3  3       0 0
+313 313  3  3       0 0
 > 
 ```
 
-* Now, use the ```glm()''' function to estimate a logistic regression model:
+* Next, we carry out a recode operation as follows:
+
+```R
+table(df$y,df$ta,exclude=NULL)
+
+df$x <- rep(NA,313)
+df$x[df$ta==1] <- 1
+df$x[df$ta==2 | df$ta==3] <- 0
+table(df$x,df$ta,exclude=NULL)
+```
+
+which yields the following output:
+
+
+```Rout
+> table(df$y,df$ta,exclude=NULL)
+   
+     1  2  3
+  0 82 87 87
+  1 10 21 26
+> 
+> df$x <- rep(NA,313)
+> df$x[df$ta==1] <- 1
+> df$x[df$ta==2 | df$ta==3] <- 0
+> table(df$x,df$ta,exclude=NULL)
+   
+      1   2   3
+  0   0 108 113
+  1  92   0   0
+> 
+```
+
+* Now, we use the ```glm()''' function to estimate a logistic regression model:
 
 ```r
 # estimate logistic regression model
