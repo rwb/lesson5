@@ -49,7 +49,7 @@ df$x[df$ta==1] <- 1
 df$x[df$ta==2 | df$ta==3] <- 0
 table(df$x,df$ta,exclude=NULL)
 
-x <- df$ta
+x <- df$x
 y <- df$y
 ```
 
